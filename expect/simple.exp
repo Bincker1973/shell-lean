@@ -1,0 +1,6 @@
+#!/usr/bin/expect
+spawn bash
+expect "$" #注意expect好像并不支持单引号
+send "echo 'welcome to my blog: bincker.cn'\n"
+send "exit\n"
+expect eof

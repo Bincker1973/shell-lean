@@ -1,0 +1,14 @@
+#!/usr/bin/expect
+spawn ping baidu.com -c 20
+expect {
+  -timeout 1
+  -re "icmp_seq=(4)" {
+    puts $expect_out(0,string)
+  }
+  eof {
+    puts "eof"
+  }
+  timeout {
+    puts "timeout"
+  }
+}

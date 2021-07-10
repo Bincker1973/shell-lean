@@ -1,0 +1,21 @@
+#!/usr/bin/expect
+puts "start current pid is [pid]"
+set forkResult [fork]
+puts "forkResult=$forkResult\tpid=[pid]"
+if $forkResult==0 {
+  puts "sub process doing some thing"
+  sleep .5
+  puts "sub process.."
+  sleep 1
+  disconnect
+  # 这里断开之后输出窗口将不会打印下面的over, 但其实际上已经运行了
+  # system echo "hello" > test.tmp #可以通过取消这条注解查看文件是否存在来判断
+} else {
+  puts "main process doing some thing"
+  sleep 1
+  puts "main process.."
+  sleep 1
+  # disconnect #这里会报错，disconnect只能断开与父进程的连接
+}
+puts "over pid=[pid]"
+

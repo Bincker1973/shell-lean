@@ -1,0 +1,4 @@
+#!/usr/bin/expect
+set var [lindex $argv 0]
+puts "第1个参数是: $var"
+

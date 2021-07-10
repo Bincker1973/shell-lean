@@ -1,0 +1,20 @@
+#!/usr/bin/expect
+set server [lindex $argv 0]
+if { $server == "" } {
+  puts "Usage: <user@server>"
+  exit 1
+}
+spawn ssh $server
+expect {
+  "password: " {
+    stty -echo
+    expect_user -re "(.*)\n"
+    stty echo
+    send "$expect_out(1,string)\r"
+    exp_continue
+  }
+  "# " { send "exit\n" }
+  timeout { exit 1 }
+  eof { exit 1 }
+}
+expect eof

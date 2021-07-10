@@ -1,0 +1,4 @@
+#!/usr/bin/expect
+set version [exec bash --version]
+puts "bash version is:"
+puts $version

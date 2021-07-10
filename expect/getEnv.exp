@@ -1,0 +1,3 @@
+#!/usr/bin/expect
+set shell $env(SHELL)
+puts "shell=$shell"

@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+spawn bash
+set timeout -1
+expect_before {
+  # 你可能会好奇为什么这里为什么会有三个反斜杠，在expect中中括号里的内容会被当作代码执行，而这里的\[则对其进行了转译，然后\\则是对正则中的中括号进行转译
+  -re "\\\[.*\\\]" {
+    puts "$expect_out(0,string)"
+    send "exit\n"
+  }
+}
+expect {
+  "$ " {
+    send "exit\n"
+  }
+}
+expect eof

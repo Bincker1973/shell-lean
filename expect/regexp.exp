@@ -1,0 +1,10 @@
+#!/usr/bin/expect
+spawn bash
+expect -re "\\$|# "
+send "exit\n"
+expect eof
+
+spawn ping baidu.com -c 1
+expect -re "(\\d{0,3}\\.\\d{0,3}\\.\\d{0,3}\\.\\d{0,3})"
+set ip $expect_out(1,string)
+puts "baidu's ip=$ip"

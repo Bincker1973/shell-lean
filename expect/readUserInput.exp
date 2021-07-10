@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+send_user "请输入ip："
+#注意这里必须要有(.*), 且加选项-re，因为\$expect_out(X,string)存的是第X个正则子匹配组
+expect_user -re "(.*)\n"
+#踩了个坑，\$expect_out(1,string)中逗号后面不能有空格
+set ip $expect_out(1,string)
+puts "ip=$ip"
+
+# 输入密码可以使用stty -echo关闭回显
+stty -echo
+send_user "请输入密码："
+expect_user -re "(.*)\n"
+set pass $expect_out(1,string)
+puts "pass=$pass"
+stty echo
+
